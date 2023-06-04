@@ -4,6 +4,7 @@ Extends [Angular Signals] with `ext` namespace, which contains:
 
 * `created`: `Date` (readonly) - when the signal was created, to help with tracking signals lifespan
 * `name`: `string` (read/write) - optional signal name, to help with signal tracking and logging
+* `log()`: `void` - extended output, into the console, of the signal name + value + parameters
 
 #### Example of naming your signals
 
@@ -35,5 +36,23 @@ console.log(s.toString()); //=> signal["my-signal"] = 123
 ```
 
 Function `toString()` for extended signals outputs `signal[name] = value`.
+
+It also serializes the signal value, which you may not want in cases when the signal
+is a large object. In this case you can use `ext.log()` instead, so the object
+is rendered by the browser, for easy navigation:
+
+```ts
+const s = signal({first: 123}, {name: 'my-signal'});
+
+s.ext.log(); //=> signal["my-signal"] = {first: 123}
+```
+
+Function `log()` also accepts optional random arguments, to be appended to the output:
+
+```ts
+const s = signal({first: 123}, {name: 'my-signal'});
+
+s.ext.log(s.ext.created.toISOString()); //=> signal["my-signal"] = {first: 123} 2023-06-04T16:10:33.319Z
+```
 
 [Angular Signals]:https://angular.io/guide/signals

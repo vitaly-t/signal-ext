@@ -4,6 +4,9 @@ import {signal as _signal, CreateSignalOptions, WritableSignal} from '@angular/c
  * Additional options when creating a signal.
  */
 export interface ICreateSignalOptionsExt<T> extends CreateSignalOptions<T> {
+    /**
+     * Signal Name.
+     */
     name?: string;
 }
 
@@ -11,7 +14,19 @@ export interface ICreateSignalOptionsExt<T> extends CreateSignalOptions<T> {
  * Extension properties that are set internally.
  */
 export interface ICreateSignalExt<T> extends ICreateSignalOptionsExt<T> {
+
+    /**
+     * Date/time when the signal was created.
+     */
     readonly created: Date;
+
+    /**
+     * Outputs `signal[name] = value` into the console, with default formatting
+     * for values-objects.
+     *
+     * You can optionally pass some parameters to be appended to the output.
+     */
+    log(...args: Array<any>): void;
 }
 
 /**
@@ -28,7 +43,10 @@ export function signal<T>(initialValue: T, options?: ICreateSignalOptionsExt<T>)
     const s = _signal(initialValue, options) as IWritableSignalExt<T>;
     const value: ICreateSignalExt<T> = {
         created: new Date(),
-        name: options?.name
+        name: options?.name,
+        log: (...args: Array<any>): void => {
+            console.log(`signal[${JSON.stringify(value.name)}] =`, s(), ...args);
+        }
     }
     Object.defineProperty(s, 'ext', {value, writable: false});
     Object.defineProperty(s, 'toString', {
