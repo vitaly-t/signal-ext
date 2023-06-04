@@ -1,10 +1,21 @@
 # signal-ext
-Angular Signal Extension
 
-### Usage Examples
+Extends [Angular Signals] with `ext` namespace, which contains:
+
+* `created`: `Date` - when the signal was created, to help with tracking signals lifespan
+* `name`: `string` - optional signal name, to help with signal tracking and logging
+
+Example of naming your signals:
 
 ```ts
-import {signal} from 'signal-ext';
+import {signal} from './signal-ext'; // new import for signals
 
-const {signal} = myExtension(); 
+const s = signal(123, {name: 'my-counter-signal'});
+
+console.log('value:', s(), 'created:', s.ext.created, 'name:', s.ext.name);
 ```
+
+Just throw [signal-ext](./signal-ext.ts) into your Angular v16+ project, and you're good to go.
+
+[Angular Signals]:https://angular.io/guide/signals
+
