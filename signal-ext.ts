@@ -31,5 +31,12 @@ export function signal<T>(initialValue: T, options?: ICreateSignalOptionsExt<T>)
         name: options?.name
     }
     Object.defineProperty(s, 'ext', {value, writable: false});
+    Object.defineProperty(s, 'toString', {
+        value(this: IWritableSignalExt<T>) {
+            return `signal[${JSON.stringify(this.ext.name)}] = ${JSON.stringify(this())}`;
+        },
+        writable: false,
+        enumerable: false
+    });
     return s;
 }

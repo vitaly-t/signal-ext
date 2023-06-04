@@ -18,4 +18,17 @@ console.log('value:', s(), 'created:', s.ext.created, 'name:', s.ext.name);
 
 Just add [./signal-ext.ts](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
 
+### Nice Console Output
+
+Call `toString()` on the extended signal to get a meaningful formatted output:
+
+```ts
+const s = signal(123, {name: 'my-signal'});
+
+console.log(s.toString()); //=> signal["my-signal"] = 123
+```
+
+Function `toString()` for extended signals will output `signal[name] = value`, as opposed to the
+meaningless function signature (default for signal functions).
+
 [Angular Signals]:https://angular.io/guide/signals
