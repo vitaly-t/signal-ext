@@ -16,6 +16,6 @@ const s = signal(123, {name: 'my-signal'});
 console.log('value:', s(), 'created:', s.ext.created, 'name:', s.ext.name);
 ```
 
-Just add [./signal-ext](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
+Just add [./signal-ext.ts](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
 
 [Angular Signals]:https://angular.io/guide/signals
