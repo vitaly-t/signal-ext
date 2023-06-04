@@ -35,7 +35,7 @@ const s = signal(123, {name: 'my-signal'});
 console.log(s.toString()); //=> signal["my-signal"] = 123
 ```
 
-Function `toString()` for extended signals outputs `signal[name] = value`.
+Function `toString()` for extended signals returns `signal[name] = value`.
 
 It also serializes the signal value, which you may not want in cases when the signal
 is a large object. In this case you can use `ext.log()` instead, so the object
