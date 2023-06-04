@@ -10,12 +10,12 @@ Extends [Angular Signals] with `ext` namespace, which contains:
 ```ts
 import {signal} from './signal-ext'; // new import for signals
 
-const s = signal(123, {name: 'my-counter-signal'});
-// or you can set name later: s.ext.name = 'my-counter-signal'
+const s = signal(123, {name: 'my-signal'});
+// or you can set name later: s.ext.name = 'my-signal'
 
 console.log('value:', s(), 'created:', s.ext.created, 'name:', s.ext.name);
 ```
 
-Just add [signal-ext](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
+Just add [./signal-ext](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
 
 [Angular Signals]:https://angular.io/guide/signals
