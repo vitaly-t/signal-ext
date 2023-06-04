@@ -26,7 +26,7 @@ export interface ICreateSignalExt<T> extends ICreateSignalOptionsExt<T> {
      *
      * You can optionally pass some parameters to be appended to the output.
      */
-    log(...args: Array<any>): void;
+    log(...args: any[]): void;
 }
 
 /**
@@ -44,8 +44,8 @@ export function signal<T>(initialValue: T, options?: ICreateSignalOptionsExt<T>)
     const value: ICreateSignalExt<T> = {
         created: new Date(),
         name: options?.name,
-        log: (...args: Array<any>): void => {
-            console.log(`signal[${JSON.stringify(value.name)}] =`, s(), ...args);
+        log(...args: any[]) {
+            console.log(`signal[${JSON.stringify(this.name)}] =`, s(), ...args);
         }
     }
     Object.defineProperty(s, 'ext', {value, writable: false});
