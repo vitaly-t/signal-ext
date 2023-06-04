@@ -18,13 +18,13 @@ console.log('value:', s(), 'created:', s.ext.created, 'name:', s.ext.name);
 
 #### Usage
 
-Just add [./signal-ext.ts](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
-You would simply import `signal` from your `signal-ext` copy instead of `@angular/core`,
+Just copy [./signal-ext.ts](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
+You would simply import `signal` from your local `signal-ext` instead of `@angular/core`,
 and the rest stays the same.
 
 This is a small extension on the existing protocol, and 100% compatible with the original.
 
-#### Improved console output
+#### Better console output
 
 Call `toString()` on the extended signal to get a meaningful formatted output:
 
@@ -34,7 +34,6 @@ const s = signal(123, {name: 'my-signal'});
 console.log(s.toString()); //=> signal["my-signal"] = 123
 ```
 
-Function `toString()` for extended signals will output `signal[name] = value`, as opposed to the
-meaningless function signature (default for signal functions).
+Function `toString()` for extended signals outputs `signal[name] = value`.
 
 [Angular Signals]:https://angular.io/guide/signals
