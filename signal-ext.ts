@@ -21,7 +21,7 @@ export interface ICreateSignalExt<T> extends ICreateSignalOptionsExt<T> {
     readonly created: Date;
 
     /**
-     * Outputs `signal[name] = value` into the console, with default formatting
+     * Outputs `signal[name] = value` into the console, with browser-formatting
      * for values-objects.
      *
      * You can optionally pass some parameters to be appended to the output.
