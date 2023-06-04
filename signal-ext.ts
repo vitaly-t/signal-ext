@@ -25,11 +25,11 @@ export interface IWritableSignalExt<T> extends WritableSignal<T> {
  * Signal creation override, to support `ext` namespace + additional initialization options.
  */
 export function signal<T>(initialValue: T, options?: ICreateSignalOptionsExt<T>): IWritableSignalExt<T> {
-    const s = _signal(initialValue, options);
+    const s = _signal(initialValue, options) as IWritableSignalExt<T>;
     const value: ICreateSignalExt<T> = {
         created: new Date(),
         name: options?.name
     }
     Object.defineProperty(s, 'ext', {value, writable: false});
-    return s as IWritableSignalExt<T>;
+    return s;
 }
