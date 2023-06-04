@@ -16,7 +16,13 @@ const s = signal(123, {name: 'my-signal'});
 console.log('value:', s(), 'created:', s.ext.created, 'name:', s.ext.name);
 ```
 
+#### Usage
+
 Just add [./signal-ext.ts](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
+You would simply import `signal` from your `signal-ext` copy instead of `@angular/core`,
+and the rest stays the same.
+
+This is a small extension on the existing protocol, and 100% compatible with the original.
 
 #### Improved console output
 
