@@ -31,5 +31,5 @@ export function signal<T>(initialValue: T, options?: ICreateSignalOptionsExt<T>)
         name: options?.name
     }
     Object.defineProperty(s, 'ext', {value, writable: false});
-    return s;
+    return s as IWritableSignalExt<T>;
 }
