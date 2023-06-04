@@ -10,7 +10,7 @@ export interface ICreateSignalOptionsExt<T> extends CreateSignalOptions<T> {
 /**
  * Extension properties that are set internally.
  */
-interface ICreateSignalExt<T> extends ICreateSignalOptionsExt<T> {
+export interface ICreateSignalExt<T> extends ICreateSignalOptionsExt<T> {
     readonly created: Date;
 }
 
