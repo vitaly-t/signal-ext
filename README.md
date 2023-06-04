@@ -14,7 +14,7 @@ import {signal} from './signal-ext'; // new import for signals
 const s = signal(123, {name: 'my-signal'});
 // or you can set name later: s.ext.name = 'my-signal'
 
-console.log('value:', s(), 'created:', s.ext.created, 'name:', s.ext.name);
+console.log(s.toString()); //=> signal["my-signal"] = 123 
 ```
 
 #### Usage
@@ -37,9 +37,9 @@ console.log(s.toString()); //=> signal["my-signal"] = 123
 
 Function `toString()` for extended signals returns `signal[name] = value`.
 
-It also serializes the signal value, which you may not want in cases when the signal
-is a large object. In this case you can use `ext.log()` instead, so the object
-is rendered by the browser, for easy navigation:
+It however also serializes the signal value, which you may not want in cases when the signal
+is a large object. In this case you can use `ext.log()` instead, so the object is rendered
+by the browser, for easy navigation:
 
 ```ts
 const s = signal({first: 123}, {name: 'my-signal'});
