@@ -1,4 +1,6 @@
-import {signal as _signal, CreateSignalOptions, WritableSignal} from '@angular/core';
+import {signal as _signal, CreateSignalOptions, WritableSignal, Signal} from '@angular/core';
+import {toSignal as _toSignal, ToSignalOptions} from '@angular/core/rxjs-interop';
+import {Observable} from 'rxjs';
 
 /**
  * Additional options when creating a signal.
@@ -36,11 +38,47 @@ export interface IWritableSignalExt<T> extends WritableSignal<T> {
     readonly ext: ICreateSignalExt<T>;
 }
 
+export interface IToSignalOptionsExt<T> extends ToSignalOptions<T> {
+    /**
+     * Signal Name.
+     */
+    name?: string;
+}
+
+export type SignalExt<T> = Signal<T> & {
+    readonly ext: ICreateSignalExt<T>;
+};
+
 /**
  * Signal creation override, to support `ext` namespace + additional initialization options.
  */
 export function signal<T>(initialValue: T, options?: ICreateSignalOptionsExt<T>): IWritableSignalExt<T> {
-    const s = _signal(initialValue, options) as IWritableSignalExt<T>;
+    const s = _signal(initialValue, options);
+    return extendSignal(s, options) as IWritableSignalExt<T>;
+}
+
+export function toSignal<T>(source: Observable<T>, options?: IToSignalOptionsExt<undefined> & {
+    requireSync?: false;
+}): SignalExt<T | undefined>;
+
+export function toSignal<T, U extends T | null | undefined>(source: Observable<T>, options: IToSignalOptionsExt<U> & {
+    initialValue: U;
+    requireSync?: false;
+}): SignalExt<T | U>;
+
+export function toSignal<T>(source: Observable<T>, options: IToSignalOptionsExt<undefined> & {
+    requireSync: true;
+}): SignalExt<T>;
+
+export function toSignal<T>(source: Observable<T>, options?: IToSignalOptionsExt<any>) {
+    const s = _toSignal(source, options as any);
+    return extendSignal(s, options);
+}
+
+/**
+ * Extends the signal.
+ */
+function extendSignal<T>(s: Signal<T>, options?: IToSignalOptionsExt<T>): SignalExt<T> {
     const value: ICreateSignalExt<T> = {
         created: new Date(),
         name: options?.name,
@@ -56,5 +94,5 @@ export function signal<T>(initialValue: T, options?: ICreateSignalOptionsExt<T>)
         writable: false,
         enumerable: false
     });
-    return s;
+    return s as SignalExt<T>;
 }
