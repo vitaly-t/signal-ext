@@ -22,7 +22,7 @@ console.log(s2.toString()); //=> signal["my-observable-signal"] = 456
 
 #### Usage
 
-Just copy [./signal-ext.ts](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
+Just copy [./signal-ext.ts](./signal-ext.ts) into your Angular v16+ project, and you're good to go.
 You would simply change import for `signal` and `toSignal` to your local `signal-ext`, and the rest stays the same.
 
 This is a small extension on the existing protocol, and 100% compatible with the original.
@@ -39,8 +39,8 @@ console.log(s.toString()); //=> signal["my-signal"] = 123
 
 Function `toString()` for extended signals returns `signal[name] = value`.
 
-It however also serializes the signal value, which you may not want in cases when the signal
-is a large object. In this case you can use `ext.log()` instead, so the object is rendered
+However, it also serializes the signal value, which you may not want in cases when the signal
+is a complex object. In this case you can use `ext.log()` instead, so the object is rendered
 by the browser, for easy navigation:
 
 ```ts
@@ -54,7 +54,7 @@ Function `log()` also accepts optional random arguments, to be appended to the o
 ```ts
 const s = signal({first: 123}, {name: 'my-signal'});
 
-s.ext.log(s.ext.created.toISOString()); //=> signal["my-signal"] = {first: 123} 2023-06-04T16:10:33.319Z
+s.ext.log(s.ext.created.toUTCString()); //=> signal["my-signal"] = {first: 123} Mon, 05 Jun 2023 12:47:44 GMT
 ```
 
 [Angular Signals]:https://angular.io/guide/signals
