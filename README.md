@@ -49,7 +49,7 @@ const s = signal({first: 123}, {name: 'my-signal'});
 s.ext.log(); //=> signal["my-signal"] = {first: 123}
 ```
 
-Function `log()` also accepts optional random arguments, to be appended to the output:
+Function `log()` outputs into the console, with optional parameters, to be appended to the output:
 
 ```ts
 const s = signal({first: 123}, {name: 'my-signal'});
