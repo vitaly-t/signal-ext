@@ -9,19 +9,21 @@ Extends [Angular Signals] with `ext` namespace, which contains:
 #### Example of naming your signals
 
 ```ts
-import {signal} from './signal-ext'; // new import for signals
+import {signal, toSignal} from './signal-ext'; // new import for signals
 
-const s = signal(123, {name: 'my-signal'});
-// or you can set name later: s.ext.name = 'my-signal'
+const s1 = signal(123, {name: 'my-signal'}); // for regular signals
+// or you can set name later: s1.ext.name = 'my-signal'
+console.log(s1.toString()); //=> signal["my-signal"] = 123
 
-console.log(s.toString()); //=> signal["my-signal"] = 123 
+const s2 = toSignal(of(456), {name: 'my-observable-signal'}); // for readonly signals
+// or you can set name later: s2.ext.name = 'my-observable-signal'
+console.log(s2.toString()); //=> signal["my-observable-signal"] = 456 
 ```
 
 #### Usage
 
 Just copy [./signal-ext.ts](./signal-ext.ts) to your Angular v16+ project, and you're good to go.
-You would simply import `signal` from your local `signal-ext` instead of `@angular/core`,
-and the rest stays the same.
+You would simply change import for `signal` and `toSignal` to your local `signal-ext`, and the rest stays the same.
 
 This is a small extension on the existing protocol, and 100% compatible with the original.
 
