@@ -31,13 +31,6 @@ export interface ICreateSignalExt<T> extends ICreateSignalOptionsExt<T> {
     log(...args: any[]): void;
 }
 
-/**
- * Extended signal signature, with `ext` namespace.
- */
-export interface IWritableSignalExt<T> extends WritableSignal<T> {
-    readonly ext: ICreateSignalExt<T>;
-}
-
 export interface IToSignalOptionsExt<T> extends ToSignalOptions<T> {
     /**
      * Signal Name.
@@ -45,6 +38,16 @@ export interface IToSignalOptionsExt<T> extends ToSignalOptions<T> {
     name?: string;
 }
 
+/**
+ * Extended signal signature, with `ext` namespace.
+ */
+export interface IWritableSignalExt<T> extends WritableSignal<T> {
+    readonly ext: ICreateSignalExt<T>;
+}
+
+/**
+ * Extended signal signature, with `ext` namespace.
+ */
 export type SignalExt<T> = Signal<T> & {
     readonly ext: ICreateSignalExt<T>;
 };
@@ -76,7 +79,7 @@ export function toSignal<T>(source: Observable<T>, options?: IToSignalOptionsExt
 }
 
 /**
- * Extends the signal.
+ * Extends any signal object, according to the declarative protocol above.
  */
 function extendSignal<T>(s: Signal<T>, options?: IToSignalOptionsExt<T>): SignalExt<T> {
     const value: ICreateSignalExt<T> = {
