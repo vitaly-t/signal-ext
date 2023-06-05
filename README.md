@@ -41,7 +41,7 @@ Function `toString()` for extended signals returns `signal[name] = value`.
 
 However, it also serializes the signal value, which you may not want in cases when the signal
 is a complex object. In this case you can use `ext.log()` instead, so the object is rendered
-by the browser, for easy navigation:
+by the browser, for property navigation:
 
 ```ts
 const s = signal({first: 123}, {name: 'my-signal'});
