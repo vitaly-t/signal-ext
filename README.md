@@ -54,7 +54,7 @@ Function `log()` also accepts optional random arguments, to be appended to the o
 ```ts
 const s = signal({first: 123}, {name: 'my-signal'});
 
-s.ext.log(s.ext.created.toUTCString()); //=> signal["my-signal"] = {first: 123} Mon, 05 Jun 2023 12:47:44 GMT
+s.ext.log(s.ext.created.toLocaleTimeString()); //=> signal["my-signal"] = {first: 123} 1:54:41 PM
 ```
 
 [Angular Signals]:https://angular.io/guide/signals
